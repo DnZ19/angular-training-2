@@ -1,0 +1,67 @@
+<section class="container">
+  <ng-container
+    *ngIf="movies.length === 0; then noMovies; else showMovies"
+  ></ng-container>
+
+  <form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        class="form-control"
+        [(ngModel)]="newMovieTitle"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="year" class="form-label">Year</label>
+      <input
+        type="number"
+        name="year"
+        id="year"
+        class="form-control"
+        [(ngModel)]="newMovieYear"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="plot" class="form-label">Plot</label>
+      <input
+        type="textarea"
+        name="plot"
+        id="plot"
+        class="form-control"
+        [(ngModel)]="newMoviePlot"
+      />
+    </div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      (click)="$event.preventDefault(); addNewMovie()"
+    >
+      Add New Movie
+    </button>
+  </form>
+</section>
+
+<ng-template #noMovies> No Movies found! </ng-template>
+
+<ng-template #showMovies>
+  <article class="movie card" style="width: 18rem" *ngFor="let movie of movies">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ movie.title }}
+      </h5>
+      <h6 class="card-subtitle">
+        {{ movie.year }}
+      </h6>
+      <h6 class="card-text" *ngIf="movie.plot !== ''">
+        {{ movie.plot }}
+      </h6>
+    </div>
+  </article>
+</ng-template>
+
+<ng-template #notUsed> Dit gaan we nooit zien. </ng-template>
